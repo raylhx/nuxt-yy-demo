@@ -16,6 +16,7 @@
     "cross-env": "^5.0.1",
     "express": "^4.15.3",
     "nuxt": "latest",
+    "postcss-loader": "^3.0.0",
     "source-map-support": "^0.4.15"
   },
   "devDependencies": {
@@ -28,6 +29,10 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "sass": "^1.15.2"
+    "node-sass": "^4.11.0",
+    "postcss-px2rem": "^0.3.0",
+    "sass": "^1.15.2",
+    "sass-loader": "^7.1.0",
+    "scss-loader": "0.0.1"
   }
 }
