@@ -5,7 +5,9 @@
         <ul class="nav-slide-list">
           <li v-for="(item, index) in navData" :key="index">
             <h2>
-              {{item.name}}
+              <nuxt-link :to="{name: 'id', params:{id:item.tag}}">
+                {{item.name}}
+              </nuxt-link>
             </h2>
           </li>
         </ul>
@@ -19,8 +21,10 @@
           <ul class="">
             <li v-for="(item, index) in navData" :key="index">
               <h2>
-                <img src="~assets/img/menu_icon2.png" />
-                <span class="text">{{item.name}}</span>
+                <nuxt-link :to="{name: 'id', params:{id:index}}">
+                  <img src="~assets/img/menu_icon2.png" />
+                  <span class="text">{{item.name}}</span>
+                </nuxt-link>
               </h2>
             </li>
           </ul>
