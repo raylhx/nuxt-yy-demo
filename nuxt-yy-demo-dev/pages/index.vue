@@ -1,57 +1,67 @@
 <template>
   <section class="container">
-    <Nav :data="navData"></Nav>
-    <List :list="listData"></List>
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      User
-    </h1>
-    <h2 class="info">
-      {{ user.name }}
-    </h2>
-    <nuxt-link class="button" to="/">
-      Users
-    </nuxt-link>
+    <div class="nav">
+      <div class="nav-wrapper">
+        <ul class="nav-slide-list">
+          <li v-for="(item, index) in navData" :key="index">
+            <h2>
+              <nuxt-link :to="{name: 'id', params:{id:item.tag}}">
+                {{item.name}}
+              </nuxt-link>
+            </h2>
+          </li>
+        </ul>
+        <div class="nav-menu">
+          <div class="menu-icon">
+            <div v-if="false" class="icon close"></div>
+            <div v-else class="icon"></div>
+          </div>
+        </div>
+        <div class="menu-box" v-if="false">
+          <ul class="">
+            <li v-for="(item, index) in navData" :key="index">
+              <h2>
+                <nuxt-link :to="{name: 'id', params:{id:index}}">
+                  <img src="~assets/img/menu_icon2.png" />
+                  <span class="text">{{item.name}}</span>
+                </nuxt-link>
+              </h2>
+            </li>
+          </ul>
+          <div class="mask"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <ul class="users">
+      <li v-for="(user, index) in users" :key="index" class="user">
+        <nuxt-link :to="{ name: 'id', params: { id: index }}">
+          {{ user.name }}
+        </nuxt-link>
+      </li>
+    </ul> -->
   </section>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
-import Nav from '~/components/Nav.vue'
-import List from '~/components/List.vue'
 
 export default {
-  name: 'id',
-  components: {
-    Nav,
-    List
-  },
-  async asyncData ({ params, error }) {
-    // return axios.get('/api/list/' + params.id)
-    //   .then((res) => {
-    //     return { user: res.data }
-    //   })
-    //   .catch((e) => {
-    //     error({ statusCode: 404, message: 'list not found' })
-    //   })
-    let [data, list] = await Promise.all([
-      axios.get('/api/nav'),
-      axios.get(`/api/list/${params.id}`)
-    ])
-    return {
-      navData: data,
-      listData: list
-    }
+  async asyncData () {
+    // let { data } = await axios.get('/api/users')
+    // return { users: data }
+    let { data } = await axios.get('/api/nav')
+    return { navData: data }
   },
   head () {
     return {
-      // title: 'User: ${this.user.name}'
+      title: 'YY-全民娱乐的互动直播平台'
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .container {
   position: relative;
   width: 100%;

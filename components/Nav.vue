@@ -1,63 +1,54 @@
 <template>
-  <section class="container">
-    <Nav :data="navData"></Nav>
-    <List :list="listData"></List>
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      User
-    </h1>
-    <h2 class="info">
-      {{ user.name }}
-    </h2>
-    <nuxt-link class="button" to="/">
-      Users
-    </nuxt-link>
-  </section>
+<div class="nav">
+  <div class="nav-wrapper">
+    <ul class="nav-slide-list">
+      <li v-for="(item, index) in data" :key="index">
+        <h2>
+          <nuxt-link :to="{name: 'id', params:{id:item.tag}}">
+            {{item.name}}
+          </nuxt-link>
+        </h2>
+      </li>
+    </ul>
+    <div class="nav-menu">
+      <div class="menu-icon">
+        <div v-if="closeMenu" class="icon close" @click.stop.prevent="isShow"></div>
+        <div v-else class="icon" @click="isShow"></div>
+      </div>
+    </div>
+    <div class="menu-box" v-if="closeMenu">
+      <ul class="">
+        <li v-for="(item, index) in navData" :key="index" @click.stop.prevent="isShow">
+          <h2>
+            <nuxt-link :to="{name: 'id', params:{id:index}}">
+              <img src="~assets/img/menu_icon2.png" />
+              <span class="text">{{item.name}}</span>
+            </nuxt-link>
+          </h2>
+        </li>
+      </ul>
+      <div class="mask" @click.stop.prevent="isShow"></div>
+    </div>
+  </div>
+</div>
 </template>
-
 <script>
-import axios from '~/plugins/axios'
-import Nav from '~/components/Nav.vue'
-import List from '~/components/List.vue'
-
 export default {
-  name: 'id',
-  components: {
-    Nav,
-    List
-  },
-  async asyncData ({ params, error }) {
-    // return axios.get('/api/list/' + params.id)
-    //   .then((res) => {
-    //     return { user: res.data }
-    //   })
-    //   .catch((e) => {
-    //     error({ statusCode: 404, message: 'list not found' })
-    //   })
-    let [data, list] = await Promise.all([
-      axios.get('/api/nav'),
-      axios.get(`/api/list/${params.id}`)
-    ])
+  props: ['data'],
+  data () {
     return {
-      navData: data,
-      listData: list
+      closeMenu: false,
     }
   },
-  head () {
-    return {
-      // title: 'User: ${this.user.name}'
-    }
-  }
-}
+  methods:{
+    isShow () {
+      this.closeMenu = !this.closeMenu
+    },
+  },
+};
 </script>
-
-<style scoped lang="scss">
-.container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.container .nav {
+<style lang="scss" scoped>
+.nav {
   z-index: 8;
   position: fixed;
   top: 97px;

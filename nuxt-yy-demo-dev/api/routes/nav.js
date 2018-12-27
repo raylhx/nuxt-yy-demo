@@ -110,4 +110,14 @@ router.get('/nav', function (req, res, next) {
   res.json(nav)
 })
 
+/* GET nav by ID. */
+router.get('/nav/:id', function (req, res, next) {
+  const id = parseInt(req.params.id)
+  if (id >= 0 && id < nav.length) {
+    res.json(nav[id])
+  } else {
+    res.sendStatus(404)
+  }
+})
+
 module.exports = router

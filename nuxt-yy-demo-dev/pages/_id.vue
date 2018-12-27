@@ -1,7 +1,35 @@
 <template>
   <section class="container">
-    <Nav :data="navData"></Nav>
-    <List :list="listData"></List>
+        <div class="nav">
+      <div class="nav-wrapper">
+        <ul class="nav-slide-list">
+          <li v-for="(item, index) in navData" :key="index">
+            <h2>
+              <nuxt-link :to="{name: 'id', params:{id:index}}">
+                {{item.name}}
+              </nuxt-link>
+            </h2>
+          </li>
+        </ul>
+        <div class="nav-menu">
+          <div class="menu-icon">
+            <div v-if="false" class="icon close"></div>
+            <div v-else class="icon"></div>
+          </div>
+        </div>
+        <div class="menu-box" v-if="false">
+          <ul class="">
+            <li v-for="(item, index) in navData" :key="index">
+              <h2>
+                <img src="~assets/img/menu_icon2.png" />
+                <span class="text">{{item.name}}</span>
+              </h2>
+            </li>
+          </ul>
+          <div class="mask"></div>
+        </div>
+      </div>
+    </div>
     <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
     <h1 class="title">
       User
@@ -17,35 +45,21 @@
 
 <script>
 import axios from '~/plugins/axios'
-import Nav from '~/components/Nav.vue'
-import List from '~/components/List.vue'
 
 export default {
   name: 'id',
-  components: {
-    Nav,
-    List
-  },
-  async asyncData ({ params, error }) {
-    // return axios.get('/api/list/' + params.id)
-    //   .then((res) => {
-    //     return { user: res.data }
-    //   })
-    //   .catch((e) => {
-    //     error({ statusCode: 404, message: 'list not found' })
-    //   })
-    let [data, list] = await Promise.all([
-      axios.get('/api/nav'),
-      axios.get(`/api/list/${params.id}`)
-    ])
-    return {
-      navData: data,
-      listData: list
-    }
+  asyncData ({ params, error }) {
+    return axios.get('/api/users/' + params.id)
+      .then((res) => {
+        return { user: res.data }
+      })
+      .catch((e) => {
+        error({ statusCode: 404, message: 'User not found' })
+      })
   },
   head () {
     return {
-      // title: 'User: ${this.user.name}'
+      title: `User: ${this.user.name}`
     }
   }
 }

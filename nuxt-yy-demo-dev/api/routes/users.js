@@ -11,7 +11,6 @@ const users = [
 
 /* GET users listing. */
 router.get('/users', function (req, res, next) {
-  // axios 请求数据 但是这里用了mock
   res.json(users)
 })
 
