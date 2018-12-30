@@ -2,7 +2,6 @@ const { Router } = require('express')
 
 const router = Router()
 
-// Mock nav
 const nav = [
   {
     name: '热门',
@@ -105,7 +104,6 @@ const nav = [
     index: 9
   }
 ]
-/* GET nav listing. */
 router.get('/nav', function (req, res, next) {
   res.json(nav)
 })

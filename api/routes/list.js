@@ -527,7 +527,6 @@ const list = {
 router.get('/list/:tag', function (req, res, next) {
   const tag = req.params.tag
   if (tag !== '') {
-    console.log(list[tag])
     res.json(list[tag])
   } else {
     res.sendStatus(404)

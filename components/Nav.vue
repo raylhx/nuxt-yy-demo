@@ -2,7 +2,7 @@
 <div class="nav">
   <div class="nav-wrapper">
     <ul class="nav-slide-list">
-      <li v-for="(item, index) in data" :key="index">
+      <li v-for="(item, index) in info" :key="index">
         <h2>
           <nuxt-link :to="{name: 'id', params:{id:item.tag}}">
             {{item.name}}
@@ -34,18 +34,18 @@
 </template>
 <script>
 export default {
-  props: ['data'],
+  props: ['info'],
   data () {
     return {
-      closeMenu: false,
+      closeMenu: false
     }
   },
-  methods:{
+  methods: {
     isShow () {
       this.closeMenu = !this.closeMenu
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .nav {
