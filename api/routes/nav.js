@@ -5,7 +5,7 @@ const router = Router()
 const nav = [
   {
     name: '热门',
-    tag: '/',
+    tag: 'index',
     title: 'YY-全民娱乐的互动直播平台',
     desc: {
       'description': 'YY致力于打造全民娱乐的互动直播平台，以多样的美女互动、优质的直播内容、极致的互动体验，满足用户音乐、舞蹈、户外等直播及绝地求生、王者荣耀等热门游戏直播的观看需求。',
