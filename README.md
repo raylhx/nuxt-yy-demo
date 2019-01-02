@@ -88,9 +88,37 @@ web客户端发送url -> 服务端返回一个html模板 -> 浏览器下载html�
 - 使用loading页面
 
 ## Vue 服务端渲染官方配置
+把官网用通俗的话来翻译就是：
+使用webpack打包服务端应用程序和客户端应用程序，把`app.js`作为一个应用程序的通用entry，作用是提供一个用于创建新的实例对象的工厂函数，`entry-client.js`客户端entry使用app.js导出的函数创建应用程序，并且直接挂载到DOM上；
+``` bash
+app.$mount('#app')
+```
+`entry-server.js`服务端entry使用 default export 导出函数，并在每次渲染中重复调用此函数，创建和返回应用程序实例，还包括服务端路由匹配和数据预期逻辑。
+``` bash
+// 服务器渲染的输出HTML 
+<div id="app" data-server-rendered="true">
+```
+webpack打包之后生成两个bundle：服务器 bundle用于服务器端渲染(SSR)，运行在Node环境中；客户端bundle会发送给浏览器，用于混合静态标记。
+最后一步是客户端激活:
+`data-server-rendered`特殊属性让客户端 Vue 知道这部分 HTML 是由 Vue 在服务端渲染的，并且应该以激活模式进行挂载。
+``` bash
+  <body>
+  <!--vue-ssr-outlet-->
+  </body>
+```
 
-
+### 官方流程图
 ![wap.yy.com](https://github.com/raylhx/nuxt-yy-demo/blob/master/static/img/vue_process1.png?raw=true)
+
+### 优势
+1. 服务配置都是可配置的，如果出了问题，能够及时找到并且解决
+
+### 劣势
+1. 配置还是有些难的。。。
+2. 环境限制：服务器渲染应用程序，需要处于 Node.js server 运行环境。
+3. 在 Node.js 中渲染完整的应用程序，显然会比仅仅提供静态文件的 server 更加大量占用 CPU 资源（可以用服务器负载+不同级别的缓存）
+
+个人开发步骤（基本按照官网的节奏来的）
 
 
 ## Nuxt.js
@@ -98,20 +126,19 @@ web客户端发送url -> 服务端返回一个html模板 -> 浏览器下载html�
 Nuxt.js 是一个基于Vue.js的通用应用框架,主要关注的是应用的UI渲染,预设了利用Vue.js开发服务端渲染的应用所需要的各种配置。通俗地说就是：开箱即用框架，省去了繁杂的配置。
 
 ## 有很多好处,比如：
-基于 Vue.js
-自动代码分层
-强大的路由功能，支持异步数据
-静态文件服务
-ES6/ES7 语法支持
-打包和压缩 JS 和 CSS
-HTML头部标签管理
-本地开发支持热加载
-支持各种样式预处理器： SASS、LESS、 Stylus等等
-支持HTTP/2 推送
+基于 Vue.js  
+自动代码分层  
+强大的路由功能，支持异步数据  
+静态文件服务  
+ES6/ES7 语法支持  
+打包和压缩 JS 和 CSS  
+HTML头部标签管理  
+本地开发支持热加载  
+支持各种样式预处理器： SASS、LESS、Stylus等等  
+支持HTTP/2 推送  
 
 ## 缺陷
-不能很好地直接地控制、扩展应用程序的结构
-如果出了bug，有时候会一脸懵逼
+不能很好地直接地控制、扩展应用程序的结构，如果出了bug，有时候会一脸懵逼
 
 Nuxt.js 应用一个完整的服务器请求到渲染（或用户通过 `<nuxt-link>`切换路由渲染页面）的流程：
 ![nuxt img](https://zh.nuxtjs.org/nuxt-schema.png)
@@ -141,7 +168,9 @@ asyncData用来异步的进行组件数据的初始化工作，fetch异步获取
 0. 选一个demo目标
 选择了https://wap.yy.com/的YY移动端页面
 1. nuxt项目生成
-目录结构...
+目录结构...  
+![nuxt content](https://github.com/raylhx/nuxt-yy-demo/blob/master/static/img/content.png?raw=true)
+
 2. 插件安装
 加入flexible.js,加入postcss-px2rem,或者其他插件
 
