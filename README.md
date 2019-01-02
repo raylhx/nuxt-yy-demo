@@ -73,6 +73,9 @@ web客户端发送url -> 服务端返回一个html模板 -> 浏览器下载html�
 2. 异步获取内容的网站，不利于seo
 3. 网络环境差的情况下，加载时间就会变得很长
 
+![vue app](https://github.com/raylhx/nuxt-yy-demo/blob/master/static/img/vue_app.png?raw=true)
+
+
 # 3 解决问题
 > seo
 
@@ -111,6 +114,7 @@ HTML头部标签管理
 如果出了bug，有时候会一脸懵逼
 
 Nuxt.js 应用一个完整的服务器请求到渲染（或用户通过 `<nuxt-link>`切换路由渲染页面）的流程：
+![nuxt img](https://zh.nuxtjs.org/nuxt-schema.png)
 
 1. 调用nuxtServerInit方法
 请求打入时，调用nuxtServerInit方法（Vuex），可以将服务器的一些数据保存，或者执行一些异步操作，并等待数据解析后返回。
@@ -139,8 +143,9 @@ asyncData用来异步的进行组件数据的初始化工作，fetch异步获取
 1. nuxt项目生成
 目录结构...
 2. 插件安装
-加入flexible.js
-加入postcss-px2rem
+加入flexible.js,加入postcss-px2rem,或者其他插件
+
+
 3. layout布局
 由于页面比较简单，只定义一个default页面以及error页面
 default引入header、footer公共组件
@@ -157,8 +162,8 @@ error页面是自定义的404页面
 6. 部署
 - 服务器 项目打包 -> 配置Nginx -> PM2配置
 
-- github pages 应用静态化 -> 修改路由 -> 访问 (-> 使用Travis CI进行部署) 由于比较穷...就用了第二个方法
-https://zhuanlan.zhihu.com/p/33350221
+- github pages 应用静态化 -> 修改路由 -> 访问 (-> 使用Travis CI进行部署)
+- .......
 
 # 4 SSR使用场景
 是否真的需要使用SSR取决于内容到大时间对应用程序的重要程度，使用服务端渲染前需要全面评估
