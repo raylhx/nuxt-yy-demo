@@ -43,6 +43,7 @@ Nuxt官网传送门 [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
 
 后端渲染HTML的情况下，浏览器会直接接收到经过服务器计算之后的呈现给用户的最终的HTML字符串，这里的计算就是服务器经过解析存放在服务器端的模板文件来完成的，在这种情况下，浏览器只进行了HTML的解析，以及通过操作系统提供的操纵显示器显示内容的系统调用在显示器上把HTML所代表的图像显示给用户。
 
+
 ## 路线:
 web客户端发送URL -> 服务端获得请求并对请求字符串分析 -> 服务端请求相关接口数据 -> 服务器初始渲染（比如Tomcat把jsp编译成servlet） -> 服务端返回已经有正确内容html -> 客户端请求相关的js/css文件 -> 等待文件下载完成 -> 等待js加载并初始化完成 -> 客户端把剩下的少量内容渲染完成
 ### 优势
@@ -86,11 +87,11 @@ web客户端发送url -> 服务端返回一个html模板 -> 浏览器下载html�
 ## Vue 服务端渲染官方配置
 
 
-
-
+![wap.yy.com](https://github.com/raylhx/nuxt-yy-demo/blob/master/static/img/vue_process1.png?raw=true)
 
 
 ## Nuxt.js
+
 Nuxt.js 是一个基于Vue.js的通用应用框架,主要关注的是应用的UI渲染,预设了利用Vue.js开发服务端渲染的应用所需要的各种配置。通俗地说就是：开箱即用框架，省去了繁杂的配置。
 
 ## 有很多好处,比如：
